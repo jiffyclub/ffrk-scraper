@@ -36,10 +36,11 @@ def process_table(table):
     chars = {}
 
     for r in rows:
-        _, _, name_cell, stat_cell = r.getchildren()
+        _, img_cell, name_cell, stat_cell = r.getchildren()
+        img = tostring(img_cell.find('a/img'), encoding='unicode')
         name, game = process_name_cell(name_cell)
         stat = int(stat_cell.text)
-        chars[name] = {'name': name, 'game': game, 'stat': stat}
+        chars[name] = {'name': name, 'game': game, 'stat': stat, 'img': img}
 
     return chars
 
@@ -51,7 +52,7 @@ def data_to_list(data):
 
     for char in names:
         data_list.append(
-            [char, data[PAGES[0]][char]['game']] +
+            [data[PAGES[0]][char]['img'], char, data[PAGES[0]][char]['game']] +
             [data[k][char]['stat'] for k in PAGES])
 
     return data_list
