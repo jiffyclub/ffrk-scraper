@@ -3,6 +3,7 @@
 import csv
 from urllib.request import urlopen
 
+from jinja2 import Template
 from lxml.html import parse
 
 URL_TPL = (
@@ -40,22 +41,27 @@ def process_table(table):
     return chars
 
 
-def write_csv(data):
-    cols = ['Name', 'Game'] + PAGES
+def data_to_list(data):
     names = sorted(data[PAGES[0]].keys())
 
-    with open('ffrk_en.csv', 'w') as f:
-        writer = csv.DictWriter(f, cols)
-        writer.writeheader()
+    data_list = []
 
-        for n in names:
-            d = {
-                'Name': n,
-                'Game': data[PAGES[0]][n]['game'],
-            }
-            for p in PAGES:
-                d[p] = data[p][n]['stat']
-            writer.writerow(d)
+    for char in names:
+        data_list.append(
+            [char, data[PAGES[0]][char]['game']] +
+            [data[k][char]['stat'] for k in PAGES])
+
+    return data_list
+
+
+def write_page(data):
+    with open('ffrk-en.html.tpl') as f:
+        tpl = f.read()
+
+    html = Template(tpl).render(data=data, col_titles=PAGES)
+
+    with open('ffrk-en.html', 'w') as f:
+        f.write(html)
 
 
 def main():
@@ -65,7 +71,8 @@ def main():
         table = get_table(URL_TPL.format(stat))
         data[stat] = process_table(table)
 
-    write_csv(data)
+    data = data_to_list(data)
+    write_page(data)
 
 
 if __name__ == '__main__':
