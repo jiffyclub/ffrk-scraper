@@ -1,10 +1,10 @@
 # encoding: utf-8
 
-import csv
+from urllib.parse import urljoin
 from urllib.request import urlopen
 
 from jinja2 import Template
-from lxml.html import parse
+from lxml.html import parse, tostring
 
 URL_TPL = (
     'https://ffrkstrategy.gamematome.jp/game/951/wiki/'
@@ -21,9 +21,12 @@ def get_table(url):
 
 
 def process_name_cell(cell):
-    name = cell.findtext('a')
-    game = cell.text_content().lstrip(name)
-    return name, game
+    name_link = cell.find('a')
+    name_link.set('href', urljoin(URL_TPL, name_link.get('href')))
+
+    game = cell.text_content().lstrip(name_link.text_content())
+
+    return tostring(name_link, encoding='unicode'), game
 
 
 def process_table(table):

@@ -19,10 +19,10 @@
         $('#char-table').dataTable({
             'data': charData,
             'columns': [
-                {'title': 'Name'},
+                {'title': 'Name', 'type': 'html'},
                 {'title': 'Game'},
                 {%- for ct in col_titles %}
-                {'title': '{{ct}}'},
+                {'title': '{{ct}}', 'type': 'num', 'searchable': false},
                 {%- endfor %}
             ],
             'order': [0, 'asc'],
