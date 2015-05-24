@@ -29,45 +29,41 @@ def process_table(table):
     rows = table.iterchildren()
     next(rows)
 
-    names, games, values = [], [], []
+    chars = {}
 
     for r in rows:
-        _, _, name_cell, value_cell = r.getchildren()
+        _, _, name_cell, stat_cell = r.getchildren()
         name, game = process_name_cell(name_cell)
-        value = int(value_cell.text)
-        names.append(name)
-        games.append(game)
-        values.append(value)
+        stat = int(stat_cell.text)
+        chars[name] = {'name': name, 'game': game, 'stat': stat}
 
-    return names, games, values
+    return chars
 
 
 def write_csv(data):
     cols = ['Name', 'Game'] + PAGES
+    names = sorted(data[PAGES[0]].keys())
 
     with open('ffrk_en.csv', 'w') as f:
         writer = csv.DictWriter(f, cols)
         writer.writeheader()
 
-        for i in range(len(data['names'])):
+        for n in names:
             d = {
-                'Name': data['names'][i],
-                'Game': data['games'][i],
+                'Name': n,
+                'Game': data[PAGES[0]][n]['game'],
             }
             for p in PAGES:
-                d[p] = data[p][i]
+                d[p] = data[p][n]['stat']
             writer.writerow(d)
 
 
 def main():
     data = {}
 
-    for p in PAGES:
-        table = get_table(URL_TPL.format(p))
-        names, games, values = process_table(table)
-        data['names'] = names
-        data['games'] = games
-        data[p] = values
+    for stat in PAGES:
+        table = get_table(URL_TPL.format(stat))
+        data[stat] = process_table(table)
 
     write_csv(data)
 
