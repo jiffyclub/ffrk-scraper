@@ -26,7 +26,7 @@
                 {'title': '{{ct}}', 'type': 'num', 'searchable': false},
                 {%- endfor %}
             ],
-            'order': [0, 'asc'],
+            'order': [1, 'asc'],
             'paging': false
           });
         });
