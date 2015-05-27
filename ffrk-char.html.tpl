@@ -14,7 +14,7 @@
     </div>
     <script>
         var charData = [
-            {{ data | join(',')}}
+            {{ data | join(',\n            ')}}
         ];
         $(document).ready(function() {
         $('#char-table').dataTable({

@@ -14,7 +14,7 @@
     </div>
     <script>
         var itemData = [
-            {{ data | join(',')}}
+            {{ data | join(',\n            ')}}
         ];
         $(document).ready(function() {
         $('#item-table').dataTable({
