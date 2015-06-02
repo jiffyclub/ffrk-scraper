@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 
 import argparse
-from urllib.parse import urljoin, quote, urlsplit, urlunsplit
-from urllib.request import urlopen
+from urllib.parse import urljoin
 
+import requests
 from jinja2 import Template
-from lxml.html import parse, tostring
+from lxml.html import document_fromstring, tostring
 
 EN_URL_TPL = (
     'https://ffrkstrategy.gamematome.jp/game/951/wiki/'
     'Character_Rankings_{} Ranking')
 JP_URL_TPL = (
     'https://xn--ffrk-8i9hs14f.gamematome.jp/game/780/wiki/'
-    'キャラクター_ランキング_{}ランキング')
+    'キャラクター_ランキング_Lv50{}ランキング')
 
 EN_PAGES = ['Attack', 'Defense', 'Magic', 'Mind', 'HP', 'Resistance', 'Speed']
 JP_PAGES = ['攻撃', '防御', '魔力', '精神', 'HP', '魔防', '素早さ']
@@ -21,13 +21,9 @@ TABLE_XPATH = '//*[@id="content_block_2"]'
 
 
 def get_table(url):
-    # japanese URLs need to be quoted into ascii
-    split = list(urlsplit(url))
-    split[2] = quote(split[2])
-    url = urlunsplit(split)
-
-    with urlopen(url) as u:
-        return parse(u).xpath(TABLE_XPATH)[0]
+    resp = requests.get(url)
+    resp.raise_for_status()
+    return document_fromstring(resp.text).xpath(TABLE_XPATH)[0]
 
 
 def process_name_cell(cell, base_url):
