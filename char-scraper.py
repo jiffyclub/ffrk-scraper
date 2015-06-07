@@ -35,6 +35,10 @@ def process_name_cell(cell, base_url):
     return tostring(name_link, encoding='unicode'), game
 
 
+def img_tag(e):
+    return list(e.iterdescendants(tag='img'))[0]
+
+
 def process_table(table, base_url):
     rows = table.iterchildren()
     next(rows)
@@ -43,7 +47,7 @@ def process_table(table, base_url):
 
     for r in rows:
         _, img_cell, name_cell, stat_cell = r.getchildren()
-        img = tostring(img_cell.find('a/img'), encoding='unicode')
+        img = tostring(img_tag(img_cell), encoding='unicode')
         name, game = process_name_cell(name_cell, base_url)
         stat = int(stat_cell.text)
         chars[name] = {'name': name, 'game': game, 'stat': stat, 'img': img}
