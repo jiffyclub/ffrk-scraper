@@ -8,6 +8,9 @@
     <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
+    <div>
+        <p>Updated on: {{ date }}</p>
+    </div>
     <div id="table_div">
         <table cellpadding="0" cellspacing="0" border="0" class="display" id="item-table">
         </table>

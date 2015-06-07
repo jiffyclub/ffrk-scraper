@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import argparse
+from datetime import date
 from urllib.parse import urljoin
 
 import requests
@@ -49,7 +50,8 @@ def write_page(data, sub):
     with open('ffrk-item.html.tpl') as f:
         tpl = f.read()
 
-    html = Template(tpl).render(data=data, sub=sub)
+    html = Template(tpl).render(
+        date=date.today().isoformat(), data=data, sub=sub)
 
     with open('ffrk-item-{}.html'.format(sub), 'w') as f:
         f.write(html)
