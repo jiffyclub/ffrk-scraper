@@ -38,7 +38,7 @@ def process_table(table, base_url, rarity):
         name_link.set('href', urljoin(base_url, name_link.get('href')))
         name = tostring(name_link, encoding='unicode')
 
-        typ = type_cell.text
+        typ = type_cell.text_content()
         atk = int(atk_cell.text)
         defense = int(def_cell.text)
         items.append([img, name, typ, rarity, atk, defense])
