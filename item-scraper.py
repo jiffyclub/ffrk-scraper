@@ -32,7 +32,7 @@ def process_table(table, base_url, rarity):
 
     for r in rows:
         img_cell, name_cell, type_cell, atk_cell, def_cell = r.getchildren()
-        img = tostring(img_cell.find('div/a/img'), encoding='unicode')
+        img = tostring(img_cell.xpath('*/img')[0], encoding='unicode')
 
         name_link = name_cell.find('a')
         name_link.set('href', urljoin(base_url, name_link.get('href')))
