@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>FFRK Characters EN</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.css">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+    <div>
+        <p>Updated on: 2015-09-06</p>
+    </div>
+    <div id="table_div">
+        <table cellpadding="0" cellspacing="0" border="0" class="display" id="char-table">
+        </table>
+    </div>
+    <script>
+        var charData = [
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/e3be6e79-18a0-3eda-8014-b1982acf7487.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_Core%20Classes_Bard">Bard</a>', 'Core Classes', 60, 63, 92, 92, 2645, 101, 99],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/18b6318f-87d5-3a5b-aa95-21a1680daa14.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_Core%20Classes_Black%20Mage">Black Mage</a>', 'Core Classes', 65, 48, 113, 81, 2314, 108, 99],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/56177909-88ce-38fc-abb2-4baf39468186.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_Core%20Classes_Ranger">Ranger</a>', 'Core Classes', 79, 67, 75, 79, 2976, 75, 111],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/3b4b079e-4a07-36a7-b1b4-5a709169012a.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_Core%20Classes_Red%20Mage">Red Mage</a>', 'Core Classes', 65, 54, 101, 96, 2678, 94, 99],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/d19a5dfb-e2f6-314f-a025-061ca7648ba7.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_Core%20Classes_Summoner">Summoner</a>', 'Core Classes', 53, 47, 108, 93, 2281, 115, 99],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/50cabc9e-bc12-370b-a514-b157464f01ff.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_Core%20Classes_Tyro">Tyro</a>', 'Core Classes', 88, 87, 87, 87, 4482, 87, 113],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/67c7015b-b2b4-310a-85ea-50815b6b110e.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_Core%20Classes_White%20Mage">White Mage</a>', 'Core Classes', 65, 56, 81, 113, 2645, 123, 99],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/4880383b-7fd3-36d8-b341-7b3719d4019b.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20II_Gordon">Gordon</a>', 'FF II', 95, 67, 129, 121, 3451, 119, 127],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/d1b268cf-0229-32fd-b131-581f9ac4ac53.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20II_Josef">Josef</a>', 'FF II', 141, 88, 86, 86, 4253, 86, 145],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/962870a2-8ddf-3742-b419-8bfff7a88d8f.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20IV_Cecil,%20Dark%20Knight">Cecil, Dark Knight</a>', 'FF IV', 140, 105, 76, 95, 5488, 80, 105],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/217973d3-6d2a-3765-8ade-1048b68aa254.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20IV_Cecil,%20Paladin">Cecil, Paladin</a>', 'FF IV', 130, 148, 76, 95, 5260, 100, 105],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/38f16fd4-aa1b-3d29-87ee-9953e6b21103.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20IV_Kain">Kain</a>', 'FF IV', 135, 116, 95, 100, 4314, 76, 155],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/e6c5324f-4014-3ec2-9c9d-dfeaccf32035.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20IV_Rydia">Rydia</a>', 'FF IV', 80, 68, 148, 110, 3408, 130, 127],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/246f4df7-927e-334e-a17d-1b6341b70435.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20IX_Eiko">Eiko</a>', 'FF IX', 64, 65, 140, 145, 3408, 138, 115],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/76c9e25e-7d65-34a3-bf6e-00087788c5e0.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20IX_Garnet">Garnet</a>', 'FF IX', 76, 70, 146, 138, 3883, 127, 127],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/29057a83-30d2-3311-8ae1-d11fa9f4dc77.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20IX_Vivi">Vivi</a>', 'FF IX', 62, 69, 159, 75, 3365, 143, 120],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/45fd568f-a0b9-3f3a-a6fa-21a93599acff.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20I_Warrior%20of%20Light">Warrior of Light</a>', 'FF I', 125, 135, 78, 75, 5263, 90, 102],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/e530b719-7f46-35ec-8b73-6ff0e6135f6b.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20VIII_Irvine">Irvine</a>', 'FF VIII', 120, 81, 103, 100, 4012, 95, 125],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/df241a75-c16f-3efa-b3bf-66eb72f67640.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20VIII_Quistis">Quistis</a>', 'FF VIII', 98, 76, 132, 100, 3883, 115, 127],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/36920d96-0bec-37de-9552-b670ef1cf8e6.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20VIII_Rinoa">Rinoa</a>', 'FF VIII', 96, 76, 148, 100, 3883, 105, 127],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/0d4a2993-5e32-3208-8da4-c7b8933e929a.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20VIII_Selphie">Selphie</a>', 'FF VIII', 80, 71, 120, 148, 3796, 125, 127],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/105091cc-9b43-32cb-981f-9c7d2ed50861.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20VIII_Squall">Squall</a>', 'FF VIII', 140, 96, 95, 95, 4619, 100, 119],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/b65a77ce-350a-3b35-afa0-854fe0aee55d.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20VII_Aerith">Aerith</a>', 'FF VII', 80, 67, 120, 148, 3451, 105, 127],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/2870b485-2141-30cc-b085-54649c49e9db.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20VII_Cloud">Cloud</a>', 'FF VII', 140, 105, 76, 95, 4574, 100, 131],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/cf8979bf-c6bd-3b21-9047-91e57fa37b3e.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20VII_Sephiroth">Sephiroth</a>', 'FF VII', 153, 108, 97, 97, 5031, 102, 137],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/39ccb314-4450-3e73-84cd-c91d714a5412.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20VII_Tifa">Tifa</a>', 'FF VII', 140, 110, 100, 95, 4505, 100, 158],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/fd8f1234-dc66-3831-b7f4-e93d865b8274.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20VI_Cyan">Cyan</a>', 'FF VI', 130, 109, 86, 100, 4616, 86, 129],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/1af0de36-251e-333e-815b-55c280f7f455.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20VI_Edgar">Edgar</a>', 'FF VI', 130, 130, 80, 95, 4711, 85, 119],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/9b70cd0a-9ad2-3ba8-9ee6-9f99a387ea38.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20VI_Sabin">Sabin</a>', 'FF VI', 138, 116, 76, 95, 5260, 76, 142],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/17fc1aae-1829-3260-93b1-ce463c5e53fd.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20XIII_Lightning">Lightning</a>', 'FF XIII', 138, 94, 95, 95, 4528, 102, 158],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/6184e892-76b7-31b4-9663-da07f0f37ac4.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20XIII_Sazh">Sazh</a>', 'FF XIII', 118, 87, 95, 105, 3969, 105, 123],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/ffeb3fe5-e084-309c-a376-c69b6987308f.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20XII_Balthier">Balthier</a>', 'FF XII', 129, 90, 82, 100, 4530, 95, 158],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/31503bce-e640-3c9c-8845-27996b559739.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20XII_Fran">Fran</a>', ' XII', 121, 94, 90, 95, 4528, 73, 131],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/8165c93b-ccb1-3158-b28f-db7f0b1827a2.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20X_Tidus">Tidus</a>', 'FF X', 138, 96, 95, 95, 4574, 90, 158],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/34161252-5af2-302f-8fac-0bf4cc972691.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20X_Wakka">Wakka</a>', 'FF X', 120, 85, 95, 100, 3883, 95, 129],
+            ['<img src="https://cdn-image.pf.dena.com/b0bf411b1e59ff824059847b9384dcc0134c5eba/1/31870025-ce76-3817-818e-c214ad461bc0.png" border="0" width="45">', '<a href="https://ffrkstrategy.gamematome.jp/game/951/wiki/Character_FF%20X_Yuna">Yuna</a>', 'FF X', 67, 75, 143, 143, 3883, 128, 127]
+        ];
+        $(document).ready(function() {
+        $('#char-table').dataTable({
+            'data': charData,
+            'columns': [
+                {'title': '', 'type': 'html', 'searchable': false, 'orderable': false},
+                {'title': 'Name', 'type': 'html'},
+                {'title': 'Game'},
+                {'title': 'Attack', 'type': 'num', 'searchable': false},
+                {'title': 'Defense', 'type': 'num', 'searchable': false},
+                {'title': 'Magic', 'type': 'num', 'searchable': false},
+                {'title': 'Mind', 'type': 'num', 'searchable': false},
+                {'title': 'HP', 'type': 'num', 'searchable': false},
+                {'title': 'Resistance', 'type': 'num', 'searchable': false},
+                {'title': 'Speed', 'type': 'num', 'searchable': false},
+            ],
+            'order': [1, 'asc'],
+            'paging': false
+          });
+        });
+    </script>
+</body>
+</html>
