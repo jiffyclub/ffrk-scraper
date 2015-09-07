@@ -1,4 +1,7 @@
 for lang in en jp
-    python char-scraper.py $lang
+    for level in 50 65
+        python char-scraper.py $lang $level
+    end
+
     python item-scraper.py $lang
 end

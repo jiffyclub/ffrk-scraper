@@ -11,9 +11,15 @@ from lxml.html import document_fromstring, tostring
 EN_URL_TPL = (
     'https://ffrkstrategy.gamematome.jp/game/951/wiki/'
     'Character_Rankings_{} Ranking')
+EN_65_URL_TPL = (
+    'https://ffrkstrategy.gamematome.jp/game/951/wiki/'
+    'Character_Rankings_Lv 65 {} Ranking')
 JP_URL_TPL = (
     'https://xn--ffrk-8i9hs14f.gamematome.jp/game/780/wiki/'
     'キャラクター_ランキング_Lv50{}ランキング')
+JP_65_URL_TPL = (
+    'https://xn--ffrk-8i9hs14f.gamematome.jp/game/780/wiki/'
+    'キャラクター_ランキング_Lv65{}ランキング')
 
 EN_PAGES = ['Attack', 'Defense', 'Magic', 'Mind', 'HP', 'Resistance', 'Speed']
 JP_PAGES = ['攻撃', '防御', '魔力', '精神', 'HP', '魔防', '素早さ']
@@ -70,14 +76,14 @@ def data_to_list(data, stat_names):
     return data_list
 
 
-def write_page(data, sub):
+def write_page(data, sub, level):
     with open('ffrk-char.html.tpl') as f:
         tpl = f.read()
 
     html = Template(tpl).render(
         date=date.today().isoformat(), data=data, col_titles=EN_PAGES, sub=sub)
 
-    with open('ffrk-char-{}.html'.format(sub), 'w') as f:
+    with open('ffrk-char-{}-lv{}.html'.format(sub, level), 'w') as f:
         f.write(html)
 
 
@@ -85,6 +91,7 @@ def parse_args():
     parser = argparse.ArgumentParser(
         description='Make an HTML page with a table of FFRK character stats.')
     parser.add_argument('source', choices=['en', 'jp'])
+    parser.add_argument('level', choices=[50, 65], type=int)
     return parser.parse_args()
 
 
@@ -94,9 +101,15 @@ def main():
     if args.source == 'en':
         pages = EN_PAGES
         url_tpl = EN_URL_TPL
+
+        if args.level == 65:
+            url_tpl = EN_65_URL_TPL
     else:
         pages = JP_PAGES
         url_tpl = JP_URL_TPL
+
+        if args.level == 65:
+            url_tpl = JP_65_URL_TPL
 
     data = {}
 
@@ -105,7 +118,7 @@ def main():
         data[stat] = process_table(table, url_tpl)
 
     data = data_to_list(data, pages)
-    write_page(data, args.source)
+    write_page(data, args.source, args.level)
 
 
 if __name__ == '__main__':
